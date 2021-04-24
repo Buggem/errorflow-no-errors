@@ -11,7 +11,7 @@ Errorflow randomly draws one of 30 different errors with corresponding sound and
 - Network tray icon -- Toggle errors quantity (RAW, MEDIUM or DEEP FRIED)
 - Volume tray icon -- Enabled/disable error sounds (pretty obviously, right?)
 - Shield tray icon -- Toggle errors type (ALL, ERROR, WARNING or MISC)
-- Clock tray -- SpaceMode (what it stands for? Check it out, you'll like it!)
+- Clock tray -- ?????? (Check it out, you'll like it!)
 
 # Legal Notice
 The Windows XP logo, Windows XP user interface, Windows XP sounds are copyrighted and belong to Microsoft.
