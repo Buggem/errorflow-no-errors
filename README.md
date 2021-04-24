@@ -1,5 +1,5 @@
 # The Errorflow
-<p align=center><a href="https://raw.githubusercontent.com/1280px/errorflow/master/readme-pic1.png"></a><br>
+<p align=center><a href="#"><img src="https://raw.githubusercontent.com/1280px/errorflow/master/readme-pic1.png"></a><br>
 The ultimate Windows XP error simulator - just turn it on and enjoy!</p>
 
 
@@ -18,4 +18,4 @@ The Windows XP logo, Windows XP user interface, Windows XP sounds are copyrighte
 The Errorflow does not claims any rights on it, all the Windows XP resources are used only for entertainment purposes!
 
 
-<p align=center><a href="https://raw.githubusercontent.com/1280px/errorflow/master/readme-pic2.png"></a><br>
+<p align=center><a href="#"><img src="https://raw.githubusercontent.com/1280px/errorflow/master/readme-pic2.png"></a><br>
