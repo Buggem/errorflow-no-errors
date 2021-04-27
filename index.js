@@ -9,8 +9,8 @@ let errType = 0;
 
 
 // Resize the canvas to match the window. Also used as a canvas cleaner.
-    winWidth = window.innerWidth;
 function setSize() {
+    winWidth = window.innerWidth;
     winHeight = window.innerHeight;
     canvas.width = winWidth;
     canvas.height = winHeight;
