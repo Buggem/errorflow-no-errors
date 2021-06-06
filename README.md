@@ -9,7 +9,7 @@ Errorflow randomly draws one of 30 different errors with corresponding sound and
 ### The taskbar has plenty of features on it: 
 - "Start" button -- Clean canvas
 - Network tray icon -- Toggle errors quantity (RAW, MEDIUM or DEEP FRIED)
-- Volume tray icon -- Enabled/disable error sounds (pretty obviously, right?)
+- Volume tray icon -- Enabled/disable error sounds (pretty obvious, huh?)
 - Shield tray icon -- Toggle errors type (ALL, ERROR, WARNING or MISC)
 - Clock tray -- ?????? (Check it out, you'll like it!)
 
