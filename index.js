@@ -39,9 +39,9 @@ function effectTearing() {
 // Add a random image to the canvas and play corresponding sound randomly
 function addImage(errorX, errorY) {
 	var rndgen = parseInt(Math.random() * 30);
-	if (errType == 1) { var rndgen = parseInt(Math.random() * 10); }
-	if (errType == 2) { var rndgen = parseInt(Math.random() * 10 + 10); }
-	if (errType == 3) { var rndgen = parseInt(Math.random() * 10 + 20); }
+	if (errType == 1) { var rndgen = parseInt(Math.random() * 11); }
+	if (errType == 2) { var rndgen = parseInt(Math.random() * 11 + 11); }
+	if (errType == 3) { var rndgen = parseInt(Math.random() * 11 + 22); }
 	let rndImage = document.getElementById('img' + rndgen);
 	let rndSound = document.getElementById('snd' + parseInt(rndgen / 2));
 	
