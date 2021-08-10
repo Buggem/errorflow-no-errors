@@ -4,40 +4,40 @@ let CTX;
 let winHeight;
 let winWidth;
 
-let errCtrl = 0.5;		// RAW = 0.8, MEDIUM = 0.5 and DEEP FRIED = 0.0 || Value should be in range of "0 >= x >= 1"
-let errType = 0;
+let errCtrl = 0.7;		// IT'S FINE/MEDIUM = 0.7, DEEP FRIED = 0.0 || Value should be in range of "0 >= x >= 1"
+let errShaking = true;	// ON/OFF scren shaking and tearing
+let errType = 0;		// 0 - everything, 1 - errors, 2 - warnings, 3 - misc
 
 
 // Resize the canvas to match the window. Also used as a canvas cleaner.
 function setSize() {
-    winWidth = window.innerWidth;
-    winHeight = window.innerHeight;
-    canvas.width = winWidth;
-    canvas.height = winHeight;
+	winWidth = window.innerWidth;
+	winHeight = window.innerHeight;
+	canvas.width = winWidth;
+	canvas.height = winHeight;
 }
 
 
 // Grab a 100-pixel-tall horizontal strip and move it left or right by 50px
 function effectTearing() {
-    for (let i = 0; i < 5; i++) {
-        let pos_y = parseInt(Math.random() * (winHeight - 100));
+	for (let i = 0; i < 5; i++) {
+		let pos_y = parseInt(Math.random() * (winHeight - 100));
 
-        CTX.drawImage(
-            canvas,
-            0,
-            pos_y,
-            winWidth,
-            100,
-            (parseInt(Math.random() * 2) * 100) - 50, // (+/-)50
-            pos_y,
-            winWidth,
-            100);
-    }
+		CTX.drawImage(
+			canvas,
+			0,
+			pos_y,
+			winWidth,
+			100,
+			(parseInt(Math.random() * 2) * 100) - 50, // (+/-)50
+			pos_y,
+			winWidth,
+			100);
+	}
 }
 
-
-// Add a random image to the canvas and play corresponding sound
-function addImage() {
+// Add a random image to the canvas and play corresponding sound randomly
+function addImage(errorX, errorY) {
 	var rndgen = parseInt(Math.random() * 30);
 	if (errType == 1) { var rndgen = parseInt(Math.random() * 10); }
 	if (errType == 2) { var rndgen = parseInt(Math.random() * 10 + 10); }
@@ -45,56 +45,87 @@ function addImage() {
 	let rndImage = document.getElementById('img' + rndgen);
 	let rndSound = document.getElementById('snd' + parseInt(rndgen / 2));
 	
+	// Use random XY if got 'rnd'
+	if (errorX == 'rnd') {
+		errorX = parseInt(Math.random() * (winWidth - rndImage.width) + Math.round(rndImage.width / 2));
+		errorY = parseInt(Math.random() * (winHeight - 20 - rndImage.height) + 15);
+	}
+	
 	if (cfgSpaceMode) { CTX.fillStyle = 'rgba(0, 0, 0, 0.2)';
 	CTX.fillRect(0, 0, canvas.width, canvas.height); }
-    CTX.drawImage(
-        rndImage,
-        parseInt(Math.random() * (winWidth - rndImage.width)),
-        parseInt(Math.random() * (winHeight - 20 - rndImage.height)) );
+	CTX.drawImage(
+		rndImage,
+		errorX - Math.round(rndImage.width / 2), 
+		errorY - 15 );
 	rndSound.currentTime = 0;
-    rndSound.play();
+	rndSound.play();
 }
 
+// Mouse up/down event listeners; mousedowntick is used to add images not too fast
+var mousedown = false;
+var mousedowntick = 4;
+window.addEventListener('mousedown', function() { mousedown = true; })
+window.addEventListener('mouseup', function() { mousedown = false; })
 
+// Add random images on mousedown
+function addImageOnMousedown(event) {
+	mousedowntick -= 1;
+
+	if(mousedowntick <= 0) {
+		var mouseX = event.clientX;
+		var mouseY = event.clientY;
+		if(mousedown == true) {
+			addImage(mouseX, mouseY);
+		}
+		mousedowntick = 4;
+	}
+}
+window.addEventListener('mouseup', function() { mousedown = false; })
+
+// Add random image on mouse click
+function addImageOnMouseclick(event) {
+	var mouseX = event.clientX;
+	var mouseY = event.clientY;
+	addImage(mouseX, mouseY);
+}
 // Temporarily bump the canvas on horizontal axis
 function effectSShakeH() {
-    canvas.style.left = Math.random() < 0.5 ? "-30px" : "30px";
-    setTimeout(function () {
-        canvas.style.left = '0px';
-    }, 50);
+	canvas.style.left = Math.random() < 0.5 ? "-30px" : "30px";
+	setTimeout(function () {
+		canvas.style.left = '0px';
+	}, 50);
 }
 
 // Temporarily bump the canvas on vertial axis
 function effectSShakeV() {
-    canvas.style.top = Math.random() < 0.5 ? "-30px" : "30px";
-    setTimeout(function () {
-        canvas.style.top = '0px';
-    }, 50);
+	canvas.style.top = Math.random() < 0.5 ? "-30px" : "30px";
+	setTimeout(function () {
+		canvas.style.top = '0px';
+	}, 50);
 }
 
 
 // Main loop (on interval)
 function mainloop() {
-    if (document.hidden === true)
-        return;		// Be courteous
-
-    if (Math.random() < 0.02 / (errCtrl + 0.2))
-        effectTearing();
-
-    if (Math.random() < 0.08 / ((errCtrl + 0.4) / 0.4))
-        effectSShakeH();
-    if (Math.random() < 0.04 / ((errCtrl + 0.4) / 0.4))
-        effectSShakeV();
-
-    if (Math.random() > errCtrl)
-        addImage();
+	if (document.hidden === true)
+		return;		// Be courteous
+	if (errShaking == true) {
+		if (Math.random() < 0.02 / (errCtrl + 0.4))
+			effectTearing();
+		if (Math.random() < 0.08 / ((errCtrl + 0.4) / 0.4))
+			effectSShakeH();
+		if (Math.random() < 0.04 / ((errCtrl + 0.4) / 0.4))
+			effectSShakeV();
+	}
+	if (Math.random() > errCtrl)
+		addImage('rnd');
 }
 
 
-// Ding when the screen is clicked
+// Ding when the loading screen is clicked
 function dingOnClick() {
-    document.getElementById("ding").currentTime = 0;
-    document.getElementById("ding").play();
+	document.getElementById("ding").currentTime = 0;
+	document.getElementById("ding").play();
 }
 
 
@@ -132,18 +163,26 @@ setInterval(updateTrayClock, 3000);
 
 
 // Errorification toggler
-function toggleErrCtrl() { 
-	if((errCtrl) == 0.5) { errCtrl = 0.8; 
-		document.getElementById('tray-errCtrl').style = 'background: url("img/tray-errCtrl-low.png")';
-		document.getElementById('tray-errCtrl').title = 'Errorification: RAW';
+function toggleErrCtrl() {
+	if(errCtrl == 0.0 && errShaking == true) { errCtrl = 1.0; errShaking = false;
+		document.getElementById('tray-errCtrl').style = 'background: url("img/tray-errCtrl-off.png")';
+		document.getElementById('tray-errCtrl').title = "Errorification: RELAX";
 		return; }
-	if((errCtrl) == 0.8) { errCtrl = 0.0; 
+	if(errCtrl == 1.0 && errShaking == false) { errCtrl = 0.7; errShaking = false;
+		document.getElementById('tray-errCtrl').style = 'background: url("img/tray-errCtrl-low.png")';
+		document.getElementById('tray-errCtrl').title = "Errorification: IT'S FINE";
+		return; }
+	if(errCtrl == 0.7 && errShaking == true) { errCtrl = 0.0; errShaking = false;
 		document.getElementById('tray-errCtrl').style = 'background: url("img/tray-errCtrl-high.png")';
+		document.getElementById('tray-errCtrl').title = "Errorification: WHAT HAPPENS";
+		return; }
+	if(errCtrl == 0.0 && errShaking == false) { errCtrl = 0.0; errShaking = true;
+		document.getElementById('tray-errCtrl').style = 'background: url("img/tray-errCtrl-highS.png")';
 		document.getElementById('tray-errCtrl').title = 'Errorification: DEEP FRIED';
 		return; }
-	else { errCtrl = 0.5; 
-		document.getElementById('tray-errCtrl').style = 'background: url("img/tray-errCtrl-med.png")';
-		document.getElementById('tray-errCtrl').title = 'Errorification: MEDIUM';
+	else { errCtrl = 0.7; errShaking = true;
+		document.getElementById('tray-errCtrl').style = 'background: url("img/tray-errCtrl-lowS.png")';
+		document.getElementById('tray-errCtrl').title = "Errorification: MEDIUM";
 		return; }
 }
 
@@ -184,33 +223,35 @@ function toggleErrType() {
 }
 
 
-// SpaceMode toggler
+// SpaceMode™ toggler
 let cfgSpaceMode = false;
 
 let SpaceModeIntervalHandler = setInterval(bgSpaceMode, 50);
+
 function bgSpaceMode() { if (cfgSpaceMode) { CTX.fillStyle = 'rgba(0, 0, 0, 0.03)'; CTX.fillRect(0, 0, canvas.width, canvas.height); } }
+
 
 function toggleSpaceMode() { cfgSpaceMode = !cfgSpaceMode;
 	if (cfgSpaceMode) {
 		setSize();
-		document.getElementById('fullscrPage').style = 'background: #000;';
-		document.getElementById('tray-clock').title = 'SpaceMode: ON';
+		setTimeout(function () { if (cfgSpaceMode) { document.getElementById('fullscrPage').style = 'background: #000;'} }, 5000)
+		document.getElementById('tray-clock').title = 'SpaceMode™: ON';
 	} else {
 		setSize();
 		document.getElementById('fullscrPage').style = 'background: url("img/background.jpg")';
 		document.getElementById('fullscrPage').style = 'background-size: cover;';
-		document.getElementById('tray-clock').title = 'SpaceMode: OFF';
+		document.getElementById('tray-clock').title = 'SpaceMode™: OFF';
 	}
 }
 
 
 // Initialize all the things
 function sw_init() {
-    document.getElementById('loading').style = 'display: none;';
-    document.getElementById('taskbar').style = 'display: block;';
-    document.getElementById("welcome").currentTime = 0;
-    document.getElementById("welcome").play();
-    setTimeout(function () {
+	document.getElementById('loading').style = 'display: none;';
+	document.getElementById('taskbar').style = 'display: block;';
+	document.getElementById("welcome").currentTime = 0;
+	document.getElementById("welcome").play();
+	setTimeout(function () {
 		canvas = document.getElementById('canvas');
 		CTX = canvas.getContext("2d");
 		window.addEventListener('resize', setSize);
@@ -219,4 +260,5 @@ function sw_init() {
 		setTimeout(function () { document.getElementById('taskbar-tooltip').style = 'display: none;'; }, 5000)
 	}, 3000)
 }
+
 window.addEventListener('load', sw_init);

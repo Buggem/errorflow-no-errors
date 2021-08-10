@@ -3,6 +3,8 @@ body {
 	cursor: url("cursor.cur"), default !important;
 	font-family: 'Tahoma', sans-serif;	font-size: 11px;	font-weight: 500;	font-smooth: never;
 	color: #fff;
+	image-rendering: pixelated;			/* for Chromium-based browsers */
+	image-rendering: crisp-edges;		/* for Firefox-based browsers */
 }
 #loading {
 	width: 100%;	height: 98vh;
@@ -56,7 +58,7 @@ body {
 	position: absolute;
 	right: 84px;
 	width: 18px;	height: 100%;
-	background: url("img/tray-errCtrl-med.png");
+	background: url("img/tray-errCtrl-lowS.png");
 }
 #tray-sounds {
 	position: absolute;

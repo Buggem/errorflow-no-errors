@@ -11,8 +11,8 @@
 <title>The Errorflow</title></head>
 
 <body id="fullscrPage">
-	<div id="loading"><img src="loading.png" style="margin: auto;"></div>
-	<canvas id="canvas" onclick="dingOnClick()"></canvas>
+	<div id="loading" onclick="dingOnClick()"><img src="loading.png" style="margin: auto;"></div>
+	<canvas id="canvas" onmousemove="addImageOnMousedown(event)" onclick="addImageOnMouseclick(event)"></canvas>
 
 	<div style="display: none;"><h1>Nothing intresting to see here. Please change this block's style back to "display: none;"</h1>
 
@@ -72,13 +72,13 @@
 	</div>
 
 	<div id="taskbar">
-		<div id="taskbar-start" title="Clean canvas" onclick="setSize()"></div>
+		<div id="taskbar-start" title="Clear desktop" onclick="setSize()"></div>
 		<div id="taskbar-tooltip"><a style="color: #fff !important;" href="https://github.com/1280px/errorflow#legal-notice">Legal Notice</a>・ Tip: enable audio autoplay for better experience!</div>
 		<div id="taskbar-tray">
 			<div id="tray-errCtrl" title="Errorification: MEDIUM" onclick="toggleErrCtrl()"></div>
 			<div id="tray-sounds" title="Sounds: ON" onclick="toggleSound()"></div>
 			<div id="tray-errType" title="Style: ALL" onclick="toggleErrType()"></div>
-			<div id="tray-clock" title="SpaceMode: OFF" onclick="toggleSpaceMode()">00:00</div>
+			<div id="tray-clock" title="SpaceMode™: OFF" onclick="toggleSpaceMode()">00:00</div>
 		</div></div>
 
 	<script src="index.js" async></script>
