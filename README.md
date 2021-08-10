@@ -1,6 +1,6 @@
 <h1>The Errorflow</h1>
-<p align=center><a href="https://1280px.github.io/p/errorflow"><img src="https://raw.githubusercontent.com/1280px/errorflow/master/readme-pic1.png"></a><br>
-<i>The ultimate Windows XP error simulator - just <a href="https://1280px.github.io/p/errorflow">open the link</a> and enjoy!</i></p>
+<p align=center><a href="https://1280px.github.io/errorflow"><img src="https://raw.githubusercontent.com/1280px/errorflow/master/readme-pic1.png"></a><br>
+<i>The ultimate Windows XP error simulator - just <a href="https://1280px.github.io/errorflow">open the link</a> and enjoy!</i></p>
 
 <br>
 Errorflow randomly draws one of 30 different high-quality errors (taken directly from Windows XP) with corresponding sound and sometimes with adds a nice-looking glitch effects such as screen shaking and tearing.
