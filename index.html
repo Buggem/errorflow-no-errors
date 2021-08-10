@@ -4,162 +4,82 @@
 <!-- Errorflow by 1280px || based on https://github.com/buckley310/sketchywebsite -->
 
 <head>
-    <meta charset="utf-8">
-	<link rel="shortcut icon" href="favicon.png" type="image/x-icon">  
-    <title>The Errorflow</title>
-    <style>
-		body {
-			background: url("img/background.jpg");
-			background-size: cover; 
-			cursor: url("cursor.cur"), default !important;
-			font-family: 'Tahoma', sans-serif;
-			font-size: 11px;
-			color: #fff;
-			font-weight: 500;
-			font-smooth: never; }
-		#loading {
-			width: 100%;
-			height: 98vh;
-			align-content: center;
-			display: flex;
-			background-color: #fffc;
-			backdrop-filter: blur(5px); }
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="index.css">
+	<link rel="shortcut icon" href="favicon.png" type="image/x-icon">
 
-        #canvas {
-            position: fixed;
-            left: 0px;
-            top: 0px;
-            width: 100%;
-            height: 100%; 
-			/* z-index: 100; */
-			cursor: url("cursor.cur"), default !important; }
-
-		#taskbar {
-			display: none;
-			position: absolute;
-			left: 0%; 
-			bottom: 0%;
-			width: 100%;
-			height: 30px;
-			background: url("img/taskbar.png"); }
-		#taskbar-start {
-			position: absolute;
-			left: 0%;
-			height: 100%; 
-			width: 100px;
-			background: url("img/taskbar-start.png");
-			cursor: url("cursor.cur"), default !important; }
-		#taskbar-tooltip {
-			position: absolute;
-			left: 108px;
-			height: 60%;
-			width: 320px;
-			margin-top: 8px; }
-		#taskbar-tray {
-		  position: absolute;
-		  right: 0%;
-		  height: 100%;
-		  width: 112px;
-		  background: url("img/taskbar-tray.png"); }
-		#tray-clock {
-		  position: absolute;
-		  right: 0px;
-		  height: 60%;
-		  width: 48px;
-		  margin-top: 8px;
-		  text-align: center;
-		  user-select: none; }
-		#tray-errCtrl {
-		  position: absolute;
-		  right: 84px;
-		  height: 100%;
-		  width: 18px;
-		  text-align: center;
-		  background: url("img/tray-errCtrl-med.png"); }
-		#tray-sounds {
-		  position: absolute;
-		  right: 64px;
-		  height: 100%;
-		  width: 18px;
-		  text-align: center;
-		  background: url("img/tray-sounds-on.png"); }
-		#tray-errType {
-		  position: absolute;
-		  right: 46px;
-		  height: 100%;
-		  width: 18px;
-		  text-align: center;
-		  background: url("img/tray-errType-all.png"); }
-    </style></head>
+<title>The Errorflow</title></head>
 
 <body id="fullscrPage">
-    <div id="loading"><img src="loading.png" style="margin: auto;"></div>
-    <canvas id="canvas" onclick="dingOnClick()"></canvas>
-    <script src="index.js" async></script>
+	<div id="loading"><img src="loading.png" style="margin: auto;"></div>
+	<canvas id="canvas" onclick="dingOnClick()"></canvas>
 
-    <div style="display: none;">
-		<h1>Nothing intresting to see here. Please change this block's style back to "display: none;"</h1>
-        <audio id="ding" src="snd/ding.mp3" controls></audio>
-        <audio id="welcome" src="snd/welcome.mp3" controls></audio>
+	<div style="display: none;"><h1>Nothing intresting to see here. Please change this block's style back to "display: none;"</h1>
 
-        <audio id="snd0" src="snd/err.mp3" controls></audio>
-        <audio id="snd1" src="snd/err.mp3" controls></audio>
-        <audio id="snd2" src="snd/err.mp3" controls></audio>
-        <audio id="snd3" src="snd/err.mp3" controls></audio>
-        <audio id="snd4" src="snd/err.mp3" controls></audio>
+		<audio id="ding" src="snd/ding.mp3" controls></audio>
+		<audio id="welcome" src="snd/welcome.mp3" controls></audio>
 
-        <audio id="snd5" src="snd/warn.mp3" controls></audio>
-        <audio id="snd6" src="snd/warn.mp3" controls></audio>
-        <audio id="snd7" src="snd/warn.mp3" controls></audio>
-        <audio id="snd8" src="snd/warn.mp3" controls></audio>
-        <audio id="snd9" src="snd/warn.mp3" controls></audio>
+		<audio id="snd0" src="snd/err.mp3" controls></audio>
+		<audio id="snd1" src="snd/err.mp3" controls></audio>
+		<audio id="snd2" src="snd/err.mp3" controls></audio>
+		<audio id="snd3" src="snd/err.mp3" controls></audio>
+		<audio id="snd4" src="snd/err.mp3" controls></audio>
 
-        <audio id="snd10" src="snd/misc.mp3" controls></audio>
-        <audio id="snd11" src="snd/misc.mp3" controls></audio>
-        <audio id="snd12" src="snd/misc.mp3" controls></audio>
-        <audio id="snd13" src="snd/misc.mp3" controls></audio>
-        <audio id="snd14" src="snd/misc.mp3" controls></audio>
+		<audio id="snd5" src="snd/warn.mp3" controls></audio>
+		<audio id="snd6" src="snd/warn.mp3" controls></audio>
+		<audio id="snd7" src="snd/warn.mp3" controls></audio>
+		<audio id="snd8" src="snd/warn.mp3" controls></audio>
+		<audio id="snd9" src="snd/warn.mp3" controls></audio>
 
-        <img id="img0" src="err/err0.png">
-        <img id="img1" src="err/err1.png">
-        <img id="img2" src="err/err2.png">
-        <img id="img3" src="err/err3.png">
-        <img id="img4" src="err/err4.png">
-        <img id="img5" src="err/err5.png">
-        <img id="img6" src="err/err6.png">
-        <img id="img7" src="err/err7.png">
-        <img id="img8" src="err/err8.png">
-        <img id="img9" src="err/err9.png">
+		<audio id="snd10" src="snd/misc.mp3" controls></audio>
+		<audio id="snd11" src="snd/misc.mp3" controls></audio>
+		<audio id="snd12" src="snd/misc.mp3" controls></audio>
+		<audio id="snd13" src="snd/misc.mp3" controls></audio>
+		<audio id="snd14" src="snd/misc.mp3" controls></audio>
 
-        <img id="img10" src="err/warn0.png">
-        <img id="img11" src="err/warn1.png">
-        <img id="img12" src="err/warn2.png">
-        <img id="img13" src="err/warn3.png">
-        <img id="img14" src="err/warn4.png">
-        <img id="img15" src="err/warn5.png">
-        <img id="img16" src="err/warn6.png">
-        <img id="img17" src="err/warn7.png">
-        <img id="img18" src="err/warn8.png">
-        <img id="img19" src="err/warn9.png">
+		<img id="img0" src="err/err0.png">
+		<img id="img1" src="err/err1.png">
+		<img id="img2" src="err/err2.png">
+		<img id="img3" src="err/err3.png">
+		<img id="img4" src="err/err4.png">
+		<img id="img5" src="err/err5.png">
+		<img id="img6" src="err/err6.png">
+		<img id="img7" src="err/err7.png">
+		<img id="img8" src="err/err8.png">
+		<img id="img9" src="err/err9.png">
 
-        <img id="img20" src="err/misc0.png">
-        <img id="img21" src="err/misc1.png">
-        <img id="img22" src="err/misc2.png">
-        <img id="img23" src="err/misc3.png">
-        <img id="img24" src="err/misc4.png">
-        <img id="img25" src="err/misc5.png">
-        <img id="img26" src="err/misc6.png">
-        <img id="img27" src="err/misc7.png">
-        <img id="img28" src="err/misc8.png">
-        <img id="img29" src="err/misc9.png">
-    </div>
-	
+		<img id="img10" src="err/warn0.png">
+		<img id="img11" src="err/warn1.png">
+		<img id="img12" src="err/warn2.png">
+		<img id="img13" src="err/warn3.png">
+		<img id="img14" src="err/warn4.png">
+		<img id="img15" src="err/warn5.png">
+		<img id="img16" src="err/warn6.png">
+		<img id="img17" src="err/warn7.png">
+		<img id="img18" src="err/warn8.png">
+		<img id="img19" src="err/warn9.png">
+
+		<img id="img20" src="err/misc0.png">
+		<img id="img21" src="err/misc1.png">
+		<img id="img22" src="err/misc2.png">
+		<img id="img23" src="err/misc3.png">
+		<img id="img24" src="err/misc4.png">
+		<img id="img25" src="err/misc5.png">
+		<img id="img26" src="err/misc6.png">
+		<img id="img27" src="err/misc7.png">
+		<img id="img28" src="err/misc8.png">
+		<img id="img29" src="err/misc9.png">
+	</div>
+
 	<div id="taskbar">
 		<div id="taskbar-start" title="Clean canvas" onclick="setSize()"></div>
 		<div id="taskbar-tooltip"><a style="color: #fff !important;" href="https://github.com/1280px/errorflow#legal-notice">Legal Notice</a>・ Tip: enable audio autoplay for better experience!</div>
 		<div id="taskbar-tray">
-		  <div id="tray-errCtrl" title="Errorification: MEDIUM" onclick="toggleErrCtrl()"></div>
-		  <div id="tray-sounds" title="Sounds: ON" onclick="toggleSound()"></div>
-		  <div id="tray-errType" title="Style: ALL" onclick="toggleErrType()"></div>
-		  <div id="tray-clock" title="SpaceMode: OFF" onclick="toggleSpaceMode()">00:00</div>
-		</div></div></body></html>
+			<div id="tray-errCtrl" title="Errorification: MEDIUM" onclick="toggleErrCtrl()"></div>
+			<div id="tray-sounds" title="Sounds: ON" onclick="toggleSound()"></div>
+			<div id="tray-errType" title="Style: ALL" onclick="toggleErrType()"></div>
+			<div id="tray-clock" title="SpaceMode: OFF" onclick="toggleSpaceMode()">00:00</div>
+		</div></div>
+
+	<script src="index.js" async></script>
+</body></html>
