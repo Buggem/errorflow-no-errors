@@ -4,7 +4,7 @@ let CTX;
 let winHeight;
 let winWidth;
 
-let errCtrl = 0.7;		// IT'S FINE/MEDIUM = 0.7, DEEP FRIED = 0.0 || Value should be in range of "0 >= x >= 1"
+let errCtrl = 0.7;		// RELAX = 1.0, IT'S FINE/MEDIUM = 0.7, WHAT HAPPENS/DEEP FRIED = 0.0 || Value should be in range of "0 >= x >= 1"
 let errShaking = true;	// ON/OFF scren shaking and tearing
 let errType = 0;		// 0 - everything, 1 - errors, 2 - warnings, 3 - misc
 
