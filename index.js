@@ -38,12 +38,14 @@ function effectTearing() {
 
 // Add a random image to the canvas and play corresponding sound randomly
 function addImage(errorX, errorY) {
-	var rndgen = parseInt(Math.random() * 30);
-	if (errType == 1) { var rndgen = parseInt(Math.random() * 11); }
-	if (errType == 2) { var rndgen = parseInt(Math.random() * 11 + 11); }
-	if (errType == 3) { var rndgen = parseInt(Math.random() * 11 + 22); }
+	var rndgen = parseInt(Math.random() * 36 + 1);
+	if (errType == 1) { var rndgen = parseInt(Math.random() * 12 + 1); }
+	if (errType == 2) { var rndgen = parseInt(Math.random() * 12 + 13); }
+	if (errType == 3) { var rndgen = parseInt(Math.random() * 12 + 25); }
 	let rndImage = document.getElementById('img' + rndgen);
-	let rndSound = document.getElementById('snd' + parseInt(rndgen / 2));
+	let rndSound = document.getElementById('snd' + Math.round(rndgen / 2));
+	console.log('snd' + Math.round(rndgen / 2));
+	console.log(rndgen);
 	
 	// Use random XY if got 'rnd'
 	if (errorX == 'rnd') {
@@ -61,7 +63,7 @@ function addImage(errorX, errorY) {
 	rndSound.play();
 }
 
-// Mouse up/down event listeners; mousedowntick is used to add images not too fast
+// Mouse up/down event listeners; mousedowntick is required to limit images drawing speed (higher = slower)
 var mousedown = false;
 var mousedowntick = 4;
 window.addEventListener('mousedown', function() { mousedown = true; })
