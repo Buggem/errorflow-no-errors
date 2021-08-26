@@ -235,7 +235,6 @@ function bgSpaceMode() { if (cfgSpaceMode) { CTX.fillStyle = 'rgba(0, 0, 0, 0.03
 
 function toggleSpaceMode() { cfgSpaceMode = !cfgSpaceMode;
 	if (cfgSpaceMode) {
-		setSize();
 		setTimeout(function () { if (cfgSpaceMode) { document.getElementById('fullscrPage').style = 'background: #000;'} }, 5000)
 		document.getElementById('tray-clock').title = 'SpaceMode™: ON';
 	} else {
