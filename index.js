@@ -20,6 +20,7 @@ function setSize() {
 
 // Grab a 100-pixel-tall horizontal strip and move it left or right by 50px
 function effectTearing() {
+	/**
 	for (let i = 0; i < 5; i++) {
 		let pos_y = parseInt(Math.random() * (winHeight - 100));
 
@@ -33,12 +34,12 @@ function effectTearing() {
 			pos_y,
 			winWidth,
 			100);
-	}
+	}**/
 }
 
 // Add a random image to the canvas and play corresponding sound randomly
 function addImage(errorX, errorY) {
-	var rndgen = parseInt(Math.random() * 36 + 1);
+	/*var rndgen = parseInt(Math.random() * 36 + 1);
 	if (errType == 1) { var rndgen = parseInt(Math.random() * 12 + 1); }
 	if (errType == 2) { var rndgen = parseInt(Math.random() * 12 + 13); }
 	if (errType == 3) { var rndgen = parseInt(Math.random() * 12 + 25); }
@@ -60,7 +61,7 @@ function addImage(errorX, errorY) {
 		errorX - Math.round(rndImage.width / 2), 
 		errorY - 15 );
 	rndSound.currentTime = 0;
-	rndSound.play();
+	rndSound.play();**/
 }
 
 // Mouse up/down event listeners; mousedowntick is required to limit images drawing speed (higher = slower)
